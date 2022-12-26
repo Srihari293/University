@@ -1,0 +1,114 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Figure 1 : GDP, life expectancy and happniess score",
+  "width": 400,
+  "height": 300,
+  "background": null,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Srihari293/Assignment_2/main/dataset/2016.csv"
+  },
+  "transform": [
+    {"calculate": "datum.Freedom_of_choice*100", "as": "Freedom of choice (%)"},
+    {
+      "calculate": "datum.Trust_on_government*100",
+      "as": "Government trust (%)"
+    },
+    {"filter": "datum.Economy_GDP_per_Capita > GDP_above"},
+    {"filter": "Continent_selection == null || datum.Region == Continent_selection"}
+  ],
+  "params": [
+    {"name": "view", "select": "interval", "bind": "scales"},
+    {
+      "name": "GDP_above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 1.6,
+        "step": 0.01,
+        "name": "GDP slider:"
+      }
+    },
+    {
+      "name": "Continent_selection",
+      "bind": {
+      "input": "select",
+      "options": [
+        null,
+        "Western Europe",
+        "North America",
+        "Australia and New Zealand",
+        "Middle East and Northern Africa",
+        "Latin America and Caribbean",
+        "Southeastern Asia",
+        "Central and Eastern Europe",
+        "Southeastern Asia",
+        "Sub-Saharan Africa"
+      ],
+      "labels": [
+        "Show All",
+        "Western Europe",
+        "North America",
+        "Australia and New Zealand",
+        "Middle East and Northern Africa",
+        "Latin America and Caribbean",
+        "Southeastern Asia",
+        "Central and Eastern Europe",
+        "Southeastern Asia",
+        "Sub-Saharan Africa"
+      ],
+      "name": "Continent:"
+      }
+    }
+  ],
+  "mark": "circle",
+  "encoding": {
+    "x": {
+      "field": "Economy_GDP_per_Capita", 
+      "scale": {"type": "linear"},
+      "title": "Economy's GDP (per capita)"
+    },
+
+    "y": {
+      "field": "Happiness_Score",
+      "type": "quantitative",
+      "scale": {"zero": false},
+      "axis": {"tickCount": 8},
+      "title": "Happiness Score"
+    },
+
+    "size": {
+      "field": "Life_Expectancy", 
+      "type": "quantitative",
+      "legend": {"title": "Life expectancy"},
+      "scale": {
+        "type": "threshold",
+        "domain": [0.15, 0.35, 0.6, 0.7],
+        "range": ["20", "40", "80", "100", "320"]
+      }
+    },
+
+    "color": {
+      "field": "Life_Expectancy",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [0.5, 0.6, 0.7, 0.8],
+        "range": ["#B30000", "#fc8715", "#FDDA0D", "#2EFF2E", "#007500"]
+      },
+      "legend": {"title": "Life expectancy"}
+    },
+    "opacity": {"value": 0.65},
+    "tooltip": [
+      {"field": "Country", "type": "nominal"},
+      {"field": "Happiness_Rank", "type": "ordinal"},
+      {"field": "Happiness_Score", "type": "quantitative"},
+      {
+        "field": "Freedom of choice (%)",
+        "type": "quantitative",
+        "format": ".2f"
+      },
+      {"field": "Government trust (%)", "type": "quantitative", "format": ".2f"}
+    ]
+  }
+}

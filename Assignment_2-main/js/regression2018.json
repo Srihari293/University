@@ -1,0 +1,65 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/Srihari293/FIT3179_practice/main/Assignment%202/dataset/2018.csv"
+    },
+    "title": "Figure 8 : 2018",
+    "background": null,
+    "width": 170,
+    "height": 220,
+    "layer": [
+      {
+        "mark": {
+          "type": "point", 
+          "filled": true
+        },
+        
+        "encoding": {
+          "x": {
+            "field": "Score", 
+            "type": "quantitative", 
+            "title":"Happiness Score"
+          },
+          
+          "y": {
+            "field": "Freedom", 
+            "type": "quantitative", 
+            "title":"Freedom of choice"
+          },
+          "tooltip": [
+            {"field": "Country_or_region", "type": "nominal"},
+            {
+              "field": "Freedom",
+              "type": "quantitative",
+              "format": ".2f"
+            }
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "line", 
+          "color": "firebrick"
+        },
+        
+        "transform": [
+          {
+            "loess": "Freedom", 
+            "on": "Score"
+          }
+        ],
+        
+        "encoding": {
+          "x": {
+            "field": "Score", 
+            "type": "quantitative"
+          },
+          
+          "y": {
+            "field": "Freedom", 
+            "type": "quantitative"
+          }
+        }
+      }
+    ]
+  }

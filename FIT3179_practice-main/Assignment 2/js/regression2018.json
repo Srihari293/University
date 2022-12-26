@@ -1,0 +1,25 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/Srihari293/FIT3179_practice/main/Assignment%202/dataset/2018.csv"
+    },
+    "width": 170,
+    "height": 220,
+    "layer": [
+      {
+        "mark": {"type": "point", "filled": true},
+        "encoding": {
+          "x": {"field": "Score", "type": "quantitative"},
+          "y": {"field": "Freedom", "type": "quantitative"}
+        }
+      },
+      {
+        "mark": {"type": "line", "color": "firebrick"},
+        "transform": [{"loess": "Freedom", "on": "Score"}],
+        "encoding": {
+          "x": {"field": "Score", "type": "quantitative"},
+          "y": {"field": "Freedom", "type": "quantitative"}
+        }
+      }
+    ]
+  }

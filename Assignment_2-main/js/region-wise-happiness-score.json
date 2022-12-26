@@ -1,0 +1,67 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Srihari293/FIT3179_practice/main/Assignment%202/dataset/2016.csv"
+  },
+  "title": "Figure 3 : Region wise avereage happiness score",
+  "background":null,
+  "width": 200,
+  "height": 200,
+  "mark": "bar",
+  "params": [
+    {
+      "name": "highlight",
+      "select": {
+        "type": "point", 
+        "on": "mouseover"
+      }
+    },
+    {
+      "name": "select", 
+      "select": "point"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "aggregate": "average",
+      "field": "Happiness_Score",
+      "title": "Average happiness score"
+    },
+    "y": {
+      "field": "Region",
+      "title": "Region"
+
+    },
+    "color":{
+      "field":"Region",
+      "legend": null
+    },
+    "fillOpacity": {
+      "condition": {
+        "param": "select", 
+        "value": 1
+      },
+      "value": 0.3
+    },
+    "strokeWidth": {
+      "condition": [
+        {
+          "param": "select",
+          "empty": false,
+          "value": 2
+        },
+        {
+          "param": "highlight",
+          "empty": false,
+          "value": 1
+        }
+      ],
+      "value": 0
+    }
+  },
+  "config": {
+    "scale": {
+      "bandPaddingInner": 0.2
+    }
+  }
+}

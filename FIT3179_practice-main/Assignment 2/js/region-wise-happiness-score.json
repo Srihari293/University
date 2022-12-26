@@ -1,0 +1,22 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Srihari293/FIT3179_practice/main/Assignment%202/dataset/2016.csv"
+  },
+  "width": 100,
+  "height": 200,
+  "mark": "bar",
+  "encoding": 
+  {
+    "x": 
+    {
+      "aggregate": "average", 
+      "field": "Happiness_Score"
+    },
+    
+    "y": 
+    {
+      "field": "Region"
+    }
+  }
+}

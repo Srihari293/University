@@ -1,0 +1,31 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url":"https://raw.githubusercontent.com/Srihari293/Assignment_2/main/dataset/2016.csv"},
+    "height":200,
+    "width": 250,
+    "title": "Figure 4 : Country wise freedom of choice",  
+    "background": null,
+    "transform": [
+      {"calculate": "datum.Freedom_of_choice*100", "as": "Freedom of choice (%)"},
+      {
+        "calculate": "datum.Trust_on_government*100",
+        "as": "Government trust (%)"
+      }
+    ],
+    "mark": {"type": "arc", "innerRadius": 50},
+    "encoding": {
+      "theta": {"field": "Trust_on_government", "type": "quantitative"},
+      "color": {"field": "Region", "type": "nominal"},
+      "tooltip": [
+        {"field": "Country", "type": "nominal"},
+        {"field": "Happiness_Rank", "type": "ordinal"},
+        {"field": "Happiness_Score", "type": "quantitative"},
+        {
+          "field": "Freedom of choice (%)",
+          "type": "quantitative",
+          "format": ".2f"
+        },
+        {"field": "Government trust (%)", "type": "quantitative", "format": ".2f"}
+      ]
+    }
+  }
